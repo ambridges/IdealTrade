@@ -1,4 +1,4 @@
-package com.hfad.idealtrade;
+package com.hfad.idealtrade.Utilities;
 
 /**
  * Created by Alex on 29/07/2016.
