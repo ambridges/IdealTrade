@@ -13,17 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.hfad.idealtrade.R;
+import com.hfad.idealtrade.fragments.CommentsFragment;
+import com.hfad.idealtrade.fragments.FeedbackFragment;
 import com.hfad.idealtrade.fragments.LandingFragment;
 import com.hfad.idealtrade.fragments.PostItemFragment;
 import com.hfad.idealtrade.fragments.PostSkillFragment;
 import com.hfad.idealtrade.fragments.SimpleRequestFragment;
+import com.hfad.idealtrade.fragments.VerifyFragment;
 import com.hfad.idealtrade.utilities.Globals;
 
 /**
  *
  * Created by Alex on 04/08/2016.
  */
-public class AppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class NotificationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public Toolbar toolbar;
 
@@ -44,7 +47,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         int intentFragment = getIntent().getExtras().getInt("fragment");
 
         // Associate a layout file
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_notification);
 
         // Initialise fields
         globals = Globals.getInstance();
@@ -71,25 +74,16 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         // Set landing fragment to main content area
         if (savedInstanceState == null) {
             switch (intentFragment){
-                case Globals.LANDING:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                case Globals.FEEDBACK:
+                    setMainFragment(new FeedbackFragment());
                     break;
-                case Globals.SKILL:
-                    setMainFragment(new PostSkillFragment());
-                    setTitle("Post a Skill");
+                case Globals.VERIFYACCOUNT:
+                    setMainFragment(new VerifyFragment());
                     break;
-                case Globals.ITEM:
-                    setMainFragment(new PostItemFragment());
-                    setTitle("Post an Item");
-                    break;
-                case Globals.REQUEST:
-                    setMainFragment(new SimpleRequestFragment());
-                    setTitle("Make a Simple Request");
-                    break;
+                case Globals.COMMENTS:
+                    setMainFragment(new CommentsFragment());
                 default:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                    setMainFragment(new FeedbackFragment());
                     break;
             }
         }
@@ -102,7 +96,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
      */
     private void setMainFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.landingFragmentContainer, fragment)
+                .replace(R.id.notificationFragmentContainer, fragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -110,10 +104,11 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item){
         int id = item.getItemId();
+        Intent appIntent = new Intent(this, AppActivity.class);
         Intent accManageIntent = new Intent(this, AccountActivity.class);
         Intent tradingIntent = new Intent(this, TradingActivity.class);
-        Intent notificationsIntent = new Intent(this, NotificationActivity.class);
         Intent actionIntent = new Intent(this, ActionActivity.class);
+
 
         // Define navigation item behaviour
         switch (id) {
@@ -123,20 +118,20 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.edit_profile:
                 // TODO implement proper profile & associated settings
-                Intent editIntent = new Intent(this, AccountActivity.class);
+                Intent editIntent = new Intent(this, MainActivity.class);
                 startActivity(editIntent);
                 break;
             case R.id.post_skill:
-                setMainFragment(new PostSkillFragment());
-                setTitle("Post a Skill");
+                appIntent.putExtra("fragment", Globals.SKILL);
+                startActivity(appIntent);
                 break;
             case R.id.post_item:
-                setMainFragment(new PostItemFragment());
-                setTitle("Post an Item");
+                appIntent.putExtra("fragment", Globals.ITEM);
+                startActivity(appIntent);
                 break;
             case R.id.simple_request:
-                setMainFragment(new SimpleRequestFragment());
-                setTitle("Make a Simple Request");
+                appIntent.putExtra("fragment", Globals.REQUEST);
+                startActivity(appIntent);
                 break;
             case R.id.account_management:
                 // TODO implement expanding menu section
@@ -182,20 +177,20 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.notifications:
                 // TODO implement expanding menu section
-                notificationsIntent.putExtra("fragment", Globals.FEEDBACK);
-                startActivity(notificationsIntent);
+                setMainFragment(new FeedbackFragment());
+                setTitle("Feedback");
                 break;
             case R.id.feedback:
-                notificationsIntent.putExtra("fragment", Globals.FEEDBACK);
-                startActivity(notificationsIntent);
+                setMainFragment(new FeedbackFragment());
+                setTitle("Feedback");
                 break;
             case R.id.verify_account:
-                notificationsIntent.putExtra("fragment", Globals.VERIFYACCOUNT);
-                startActivity(notificationsIntent);
+                setMainFragment(new VerifyFragment());
+                setTitle("Verify Account");
                 break;
             case R.id.comments:
-                notificationsIntent.putExtra("fragment", Globals.COMMENTS);
-                startActivity(notificationsIntent);
+                setMainFragment(new CommentsFragment());
+                setTitle("Comments");
                 break;
             case R.id.take_action:
                 // TODO implement expanding menu section

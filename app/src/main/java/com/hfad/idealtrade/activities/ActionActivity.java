@@ -13,17 +13,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.hfad.idealtrade.R;
+import com.hfad.idealtrade.fragments.CommentsFragment;
+import com.hfad.idealtrade.fragments.ComplaintsFragment;
+import com.hfad.idealtrade.fragments.DonationsFragment;
+import com.hfad.idealtrade.fragments.FeedbackFragment;
+import com.hfad.idealtrade.fragments.InviteFragment;
 import com.hfad.idealtrade.fragments.LandingFragment;
 import com.hfad.idealtrade.fragments.PostItemFragment;
 import com.hfad.idealtrade.fragments.PostSkillFragment;
+import com.hfad.idealtrade.fragments.QueriesFragment;
 import com.hfad.idealtrade.fragments.SimpleRequestFragment;
+import com.hfad.idealtrade.fragments.SuggestionsFragment;
+import com.hfad.idealtrade.fragments.VerifyFragment;
 import com.hfad.idealtrade.utilities.Globals;
 
 /**
  *
  * Created by Alex on 04/08/2016.
  */
-public class AppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ActionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public Toolbar toolbar;
 
@@ -44,7 +52,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         int intentFragment = getIntent().getExtras().getInt("fragment");
 
         // Associate a layout file
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_action);
 
         // Initialise fields
         globals = Globals.getInstance();
@@ -71,25 +79,23 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         // Set landing fragment to main content area
         if (savedInstanceState == null) {
             switch (intentFragment){
-                case Globals.LANDING:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                case Globals.INVITEFRIENDS:
+                    setMainFragment(new InviteFragment());
                     break;
-                case Globals.SKILL:
-                    setMainFragment(new PostSkillFragment());
-                    setTitle("Post a Skill");
+                case Globals.SUGGESTIONBOX:
+                    setMainFragment(new SuggestionsFragment());
                     break;
-                case Globals.ITEM:
-                    setMainFragment(new PostItemFragment());
-                    setTitle("Post an Item");
+                case Globals.COMPLAINTS:
+                    setMainFragment(new ComplaintsFragment());
                     break;
-                case Globals.REQUEST:
-                    setMainFragment(new SimpleRequestFragment());
-                    setTitle("Make a Simple Request");
+                case Globals.DONATIONS:
+                    setMainFragment(new DonationsFragment());
+                    break;
+                case Globals.QUERIES:
+                    setMainFragment(new QueriesFragment());
                     break;
                 default:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                    setMainFragment(new InviteFragment());
                     break;
             }
         }
@@ -102,7 +108,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
      */
     private void setMainFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.landingFragmentContainer, fragment)
+                .replace(R.id.actionFragmentContainer, fragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -110,10 +116,12 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item){
         int id = item.getItemId();
+        Intent appIntent = new Intent(this, AppActivity.class);
         Intent accManageIntent = new Intent(this, AccountActivity.class);
         Intent tradingIntent = new Intent(this, TradingActivity.class);
         Intent notificationsIntent = new Intent(this, NotificationActivity.class);
         Intent actionIntent = new Intent(this, ActionActivity.class);
+
 
         // Define navigation item behaviour
         switch (id) {
@@ -127,16 +135,16 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 startActivity(editIntent);
                 break;
             case R.id.post_skill:
-                setMainFragment(new PostSkillFragment());
-                setTitle("Post a Skill");
+                appIntent.putExtra("fragment", Globals.SKILL);
+                startActivity(appIntent);
                 break;
             case R.id.post_item:
-                setMainFragment(new PostItemFragment());
-                setTitle("Post an Item");
+                appIntent.putExtra("fragment", Globals.ITEM);
+                startActivity(appIntent);
                 break;
             case R.id.simple_request:
-                setMainFragment(new SimpleRequestFragment());
-                setTitle("Make a Simple Request");
+                appIntent.putExtra("fragment", Globals.REQUEST);
+                startActivity(appIntent);
                 break;
             case R.id.account_management:
                 // TODO implement expanding menu section
@@ -199,28 +207,28 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.take_action:
                 // TODO implement expanding menu section
-                actionIntent.putExtra("fragment", Globals.INVITEFRIENDS);
-                startActivity(actionIntent);
+                setMainFragment(new InviteFragment());
+                setTitle("Invite a Friend");
                 break;
             case R.id.invite_friends:
-                actionIntent.putExtra("fragment", Globals.INVITEFRIENDS);
-                startActivity(actionIntent);
+                setMainFragment(new InviteFragment());
+                setTitle("Invite a Friend");
                 break;
             case R.id.suggestion_box:
-                actionIntent.putExtra("fragment", Globals.SUGGESTIONBOX);
-                startActivity(actionIntent);
+                setMainFragment(new SuggestionsFragment());
+                setTitle("Suggestion Box");
                 break;
             case R.id.complaints:
-                actionIntent.putExtra("fragment", Globals.COMPLAINTS);
-                startActivity(actionIntent);
+                setMainFragment(new ComplaintsFragment());
+                setTitle("Complaints");
                 break;
             case R.id.donations:
-                actionIntent.putExtra("fragment", Globals.DONATIONS);
-                startActivity(actionIntent);
+                setMainFragment(new DonationsFragment());
+                setTitle("Donations");
                 break;
             case R.id.queries:
-                actionIntent.putExtra("fragment", Globals.QUERIES);
-                startActivity(actionIntent);
+                setMainFragment(new QueriesFragment());
+                setTitle("Queries");
                 break;
             case R.id.settings:
                 // TODO implement settings

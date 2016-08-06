@@ -11,11 +11,14 @@ import android.widget.Button;
 
 import com.hfad.idealtrade.activities.AppActivity;
 import com.hfad.idealtrade.R;
+import com.hfad.idealtrade.utilities.Globals;
 import com.hfad.idealtrade.utilities.OnSwipeTouchListener;
 
 public class LoginActivityFragment1 extends Fragment {
 
     private FragmentManager fragmentManager;
+
+    private Globals globals;
 
     public LoginActivityFragment1() {
     }
@@ -23,6 +26,7 @@ public class LoginActivityFragment1 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        globals = Globals.getInstance();
         fragmentManager = getFragmentManager();
     }
 
@@ -41,6 +45,7 @@ public class LoginActivityFragment1 extends Fragment {
         goToApp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(getActivity(), AppActivity.class);
+                myIntent.putExtra("fragment", Globals.LANDING);
                 startActivity(myIntent);
             }
         });

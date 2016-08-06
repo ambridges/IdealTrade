@@ -2,6 +2,7 @@ package com.hfad.idealtrade.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,17 +14,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.hfad.idealtrade.R;
+import com.hfad.idealtrade.fragments.ContactsFragment;
+import com.hfad.idealtrade.fragments.FileSharingFragment;
+import com.hfad.idealtrade.fragments.InboxFragment;
 import com.hfad.idealtrade.fragments.LandingFragment;
 import com.hfad.idealtrade.fragments.PostItemFragment;
 import com.hfad.idealtrade.fragments.PostSkillFragment;
+import com.hfad.idealtrade.fragments.PrivacyFragment;
+import com.hfad.idealtrade.fragments.ProfileFragment;
 import com.hfad.idealtrade.fragments.SimpleRequestFragment;
+import com.hfad.idealtrade.fragments.VideoSharingFragment;
 import com.hfad.idealtrade.utilities.Globals;
 
 /**
  *
  * Created by Alex on 04/08/2016.
  */
-public class AppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AccountActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public Toolbar toolbar;
 
@@ -44,7 +51,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         int intentFragment = getIntent().getExtras().getInt("fragment");
 
         // Associate a layout file
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_account);
 
         // Initialise fields
         globals = Globals.getInstance();
@@ -68,28 +75,36 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        // Set landing fragment to main content area
+        // Set appropriate fragment to main content area
         if (savedInstanceState == null) {
             switch (intentFragment){
-                case Globals.LANDING:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                case Globals.PROFILE:
+                    setMainFragment(new ProfileFragment());
+                    setTitle("Profile");
                     break;
-                case Globals.SKILL:
-                    setMainFragment(new PostSkillFragment());
-                    setTitle("Post a Skill");
+                case Globals.INBOX:
+                    setMainFragment(new InboxFragment());
+                    setTitle("Inbox");
                     break;
-                case Globals.ITEM:
-                    setMainFragment(new PostItemFragment());
-                    setTitle("Post an Item");
+                case Globals.CONTACTS:
+                    setMainFragment(new ContactsFragment());
+                    setTitle("Contacts");
                     break;
-                case Globals.REQUEST:
-                    setMainFragment(new SimpleRequestFragment());
-                    setTitle("Make a Simple Request");
+                case Globals.PRIVACYSETTINGS:
+                    setMainFragment(new PrivacyFragment());
+                    setTitle("Privacy Settings");
+                    break;
+                case Globals.VIDEOSHARING:
+                    setMainFragment(new VideoSharingFragment());
+                    setTitle("Video Sharing");
+                    break;
+                case Globals.FILESHARING:
+                    setMainFragment(new FileSharingFragment());
+                    setTitle("File Sharing");
                     break;
                 default:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                    setMainFragment(new ProfileFragment());
+                    setTitle("Profile");
                     break;
             }
         }
@@ -102,7 +117,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
      */
     private void setMainFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.landingFragmentContainer, fragment)
+                .replace(R.id.accountFragmentContainer, fragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -110,7 +125,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item){
         int id = item.getItemId();
-        Intent accManageIntent = new Intent(this, AccountActivity.class);
+        Intent appIntent = new Intent(this, AppActivity.class);
         Intent tradingIntent = new Intent(this, TradingActivity.class);
         Intent notificationsIntent = new Intent(this, NotificationActivity.class);
         Intent actionIntent = new Intent(this, ActionActivity.class);
@@ -127,41 +142,41 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 startActivity(editIntent);
                 break;
             case R.id.post_skill:
-                setMainFragment(new PostSkillFragment());
-                setTitle("Post a Skill");
+                appIntent.putExtra("fragment", Globals.SKILL);
+                startActivity(appIntent);
                 break;
             case R.id.post_item:
-                setMainFragment(new PostItemFragment());
-                setTitle("Post an Item");
+                appIntent.putExtra("fragment", Globals.ITEM);
+                startActivity(appIntent);
                 break;
             case R.id.simple_request:
-                setMainFragment(new SimpleRequestFragment());
-                setTitle("Make a Simple Request");
+                appIntent.putExtra("fragment", Globals.REQUEST);
+                startActivity(appIntent);
                 break;
             case R.id.account_management:
                 // TODO implement expanding menu section
-                accManageIntent.putExtra("fragment", Globals.PROFILE);
-                startActivity(accManageIntent);
+                setMainFragment(new ProfileFragment());
+                setTitle("Profile");
                 break;
             case R.id.inbox:
-                accManageIntent.putExtra("fragment", Globals.INBOX);
-                startActivity(accManageIntent);
+                setMainFragment(new InboxFragment());
+                setTitle("Inbox");
                 break;
             case R.id.contacts:
-                accManageIntent.putExtra("fragment", Globals.CONTACTS);
-                startActivity(accManageIntent);
+                setMainFragment(new ContactsFragment());
+                setTitle("Contacts");
                 break;
             case R.id.privacy_settings:
-                accManageIntent.putExtra("fragment", Globals.PRIVACYSETTINGS);
-                startActivity(accManageIntent);
+                setMainFragment(new PrivacyFragment());
+                setTitle("Privacy Settings");
                 break;
             case R.id.video_sharing:
-                accManageIntent.putExtra("fragment", Globals.VIDEOSHARING);
-                startActivity(accManageIntent);
+                setMainFragment(new VideoSharingFragment());
+                setTitle("Video Sharing");
                 break;
             case R.id.file_sharing:
-                accManageIntent.putExtra("fragment", Globals.FILESHARING);
-                startActivity(accManageIntent);
+                setMainFragment(new FileSharingFragment());
+                setTitle("File Sharing");
                 break;
             case R.id.trading_overview:
                 // TODO implement expanding menu section
@@ -182,19 +197,19 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.notifications:
                 // TODO implement expanding menu section
-                notificationsIntent.putExtra("fragment", Globals.FEEDBACK);
+                notificationsIntent.putExtra("fragment",Globals.FEEDBACK);
                 startActivity(notificationsIntent);
                 break;
             case R.id.feedback:
-                notificationsIntent.putExtra("fragment", Globals.FEEDBACK);
+                notificationsIntent.putExtra("fragment",Globals.FEEDBACK);
                 startActivity(notificationsIntent);
                 break;
             case R.id.verify_account:
-                notificationsIntent.putExtra("fragment", Globals.VERIFYACCOUNT);
+                notificationsIntent.putExtra("fragment",Globals.VERIFYACCOUNT);
                 startActivity(notificationsIntent);
                 break;
             case R.id.comments:
-                notificationsIntent.putExtra("fragment", Globals.COMMENTS);
+                notificationsIntent.putExtra("fragment",Globals.COMMENTS);
                 startActivity(notificationsIntent);
                 break;
             case R.id.take_action:

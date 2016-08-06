@@ -13,17 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.hfad.idealtrade.R;
+import com.hfad.idealtrade.fragments.FavouritesFragment;
 import com.hfad.idealtrade.fragments.LandingFragment;
+import com.hfad.idealtrade.fragments.MyListingsFragment;
 import com.hfad.idealtrade.fragments.PostItemFragment;
 import com.hfad.idealtrade.fragments.PostSkillFragment;
 import com.hfad.idealtrade.fragments.SimpleRequestFragment;
+import com.hfad.idealtrade.fragments.TradesFragment;
 import com.hfad.idealtrade.utilities.Globals;
 
 /**
  *
  * Created by Alex on 04/08/2016.
  */
-public class AppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TradingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public Toolbar toolbar;
 
@@ -44,7 +47,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         int intentFragment = getIntent().getExtras().getInt("fragment");
 
         // Associate a layout file
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_trading);
 
         // Initialise fields
         globals = Globals.getInstance();
@@ -71,25 +74,21 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
         // Set landing fragment to main content area
         if (savedInstanceState == null) {
             switch (intentFragment){
-                case Globals.LANDING:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                case Globals.TRADES:
+                    setMainFragment(new TradesFragment());
+                    setTitle("Trades");
                     break;
-                case Globals.SKILL:
-                    setMainFragment(new PostSkillFragment());
-                    setTitle("Post a Skill");
+                case Globals.FAVOURITELISTINGS:
+                    setMainFragment(new FavouritesFragment());
+                    setTitle("Favourite Listings");
                     break;
-                case Globals.ITEM:
-                    setMainFragment(new PostItemFragment());
-                    setTitle("Post an Item");
-                    break;
-                case Globals.REQUEST:
-                    setMainFragment(new SimpleRequestFragment());
-                    setTitle("Make a Simple Request");
+                case Globals.MYLISTINGS:
+                    setMainFragment(new MyListingsFragment());
+                    setTitle("My Listings");
                     break;
                 default:
-                    setMainFragment(new LandingFragment());
-                    setTitle("Ideal Trade");
+                    setMainFragment(new TradesFragment());
+                    setTitle("Profile");
                     break;
             }
         }
@@ -102,7 +101,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
      */
     private void setMainFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.landingFragmentContainer, fragment)
+                .replace(R.id.tradingFragmentContainer, fragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -111,9 +110,9 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(MenuItem item){
         int id = item.getItemId();
         Intent accManageIntent = new Intent(this, AccountActivity.class);
-        Intent tradingIntent = new Intent(this, TradingActivity.class);
         Intent notificationsIntent = new Intent(this, NotificationActivity.class);
         Intent actionIntent = new Intent(this, ActionActivity.class);
+
 
         // Define navigation item behaviour
         switch (id) {
@@ -165,20 +164,20 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.trading_overview:
                 // TODO implement expanding menu section
-                tradingIntent.putExtra("fragment", Globals.TRADES);
-                startActivity(tradingIntent);
+                setMainFragment(new TradesFragment());
+                setTitle("Trades");
                 break;
             case R.id.trades:
-                tradingIntent.putExtra("fragment", Globals.TRADES);
-                startActivity(tradingIntent);
+                setMainFragment(new TradesFragment());
+                setTitle("Trades");
                 break;
             case R.id.favourite_listings:
-                tradingIntent.putExtra("fragment", Globals.FAVOURITELISTINGS);
-                startActivity(tradingIntent);
+                setMainFragment(new FavouritesFragment());
+                setTitle("Favourite Listings");
                 break;
             case R.id.my_listings:
-                tradingIntent.putExtra("fragment", Globals.MYLISTINGS);
-                startActivity(tradingIntent);
+                setMainFragment(new MyListingsFragment());
+                setTitle("My Listings");
                 break;
             case R.id.notifications:
                 // TODO implement expanding menu section
