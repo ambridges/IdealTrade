@@ -12,9 +12,9 @@ import com.hfad.idealtrade.R;
  *
  * Created by Alex on 04/08/2016.
  */
-public class PlaceholderFragment extends Fragment {
+public class VerifyFragment extends Fragment {
 
-    public PlaceholderFragment() {
+    public VerifyFragment() {
     }
 
     @Override
@@ -25,7 +25,7 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_placeholder, container, false);
+        View view = inflater.inflate(R.layout.fragment_verifyaccount, container, false);
 
         return view;
     }
