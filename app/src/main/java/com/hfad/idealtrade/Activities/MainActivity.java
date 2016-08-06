@@ -1,4 +1,4 @@
-package com.hfad.idealtrade.Activities;
+package com.hfad.idealtrade.activities;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hfad.idealtrade.R;
-import com.hfad.idealtrade.Fragments.MainActivityFragment1;
+import com.hfad.idealtrade.fragments.LoginActivityFragment1;
 
 /**
  *
@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
-            setMainFragment(new MainActivityFragment1());
+            setMainFragment(new LoginActivityFragment1());
         }
     }
 
     private void setMainFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.mainFragmentContainer, fragment)
+                .replace(R.id.loginFragmentContainer, fragment)
                 .commit();
     }
 }

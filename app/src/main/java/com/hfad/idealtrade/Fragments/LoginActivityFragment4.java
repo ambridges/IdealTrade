@@ -1,4 +1,4 @@
-package com.hfad.idealtrade.Fragments;
+package com.hfad.idealtrade.fragments;
 
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -8,16 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hfad.idealtrade.R;
-import com.hfad.idealtrade.Utilities.OnSwipeTouchListener;
+import com.hfad.idealtrade.utilities.OnSwipeTouchListener;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment4 extends Fragment {
+public class LoginActivityFragment4 extends Fragment {
 
     private FragmentManager fragmentManager;
 
-    public MainActivityFragment4() {
+    public LoginActivityFragment4() {
     }
 
     @Override
@@ -29,11 +29,11 @@ public class MainActivityFragment4 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment4_main, container, false);
+        View view = inflater.inflate(R.layout.fragment4_login, container, false);
 
         view.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
             public void onSwipeRight() {
-                setMainFragment(new MainActivityFragment3());
+                setMainFragment(new LoginActivityFragment3());
             }
         });
 
@@ -42,7 +42,7 @@ public class MainActivityFragment4 extends Fragment {
 
     private void setMainFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.mainFragmentContainer, fragment)
+                .replace(R.id.loginFragmentContainer, fragment)
                 .commit();
     }
 }

@@ -6,12 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Fragments.MainActivityFragment3"
+    tools:context=".fragments.LoginActivityFragment1"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Video" />
+        android:text="Log in / Sign Up" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/GoToApp"
+        android:text="Go To App"/>
 
 </RelativeLayout>

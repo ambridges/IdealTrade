@@ -6,12 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Fragments.MainActivityFragment4"
+    tools:context=".fragments.PostSkillFragment"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log In / Sign Up 2" />
+        android:text="@string/post_a_skill"/>
 
 </RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/edit_profile"
+            android:title="@string/edit_profile"/>
+        <item
+            android:id="@+id/post_skill"
+            android:title="@string/post_a_skill"/>
+        <item
+            android:id="@+id/post_item"
+            android:title="@string/post_an_item"/>
+        <item
+            android:id="@+id/simple_request"
+            android:title="@string/make_a_simple_request"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/account_management"
+            android:title="@string/account_management"/>
+        <item
+            android:id="@+id/inbox"
+            android:title="@string/inbox"/>
+        <item
+            android:id="@+id/contacts"
+            android:title="@string/contacts"/>
+        <item
+            android:id="@+id/privacy_settings"
+            android:title="@string/privacy_settings"/>
+        <item
+            android:id="@+id/video_sharing"
+            android:title="@string/video_sharing"/>
+        <item
+            android:id="@+id/file_sharing"
+            android:title="@string/file_sharing"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/trading_overview"
+            android:title="@string/trading_overview"/>
+        <item
+            android:id="@+id/trades"
+            android:title="@string/trades"/>
+        <item
+            android:id="@+id/favourite_listings"
+            android:title="@string/favourite_listings"/>
+        <item
+            android:id="@+id/my_listings"
+            android:title="@string/my_listings"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/notifications"
+            android:title="@string/notifications"/>
+        <item
+            android:id="@+id/feedback"
+            android:title="@string/feedback"/>
+        <item
+            android:id="@+id/verify_account"
+            android:title="@string/verify_account"/>
+        <item
+            android:id="@+id/comments"
+            android:title="@string/comments"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/take_action"
+            android:title="@string/take_action"/>
+        <item
+            android:id="@+id/invite_friends"
+            android:title="@string/invite_friends"/>
+        <item
+            android:id="@+id/suggestion_box"
+            android:title="@string/suggestion_box"/>
+        <item
+            android:id="@+id/complaints"
+            android:title="@string/complaints"/>
+        <item
+            android:id="@+id/donations"
+            android:title="@string/donations"/>
+        <item
+            android:id="@+id/queries"
+            android:title="@string/queries"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings"
+            android:title="@string/settings"/>
+        <item
+            android:id="@+id/log_out"
+            android:title="@string/log_out"/>
+    </group>
+</menu>

@@ -12,9 +12,9 @@ import com.hfad.idealtrade.R;
  *
  * Created by Alex on 04/08/2016.
  */
-public class LandingFragment extends Fragment {
+public class PostItemFragment extends Fragment {
 
-    public LandingFragment() {
+    public PostItemFragment() {
     }
 
     @Override
@@ -25,7 +25,7 @@ public class LandingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_landing, container, false);
+        View view = inflater.inflate(R.layout.fragment_postitem, container, false);
 
         return view;
     }

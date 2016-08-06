@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:theme="@style/AppTheme.NoActionBar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mainFragmentContainer"/>
+        android:id="@+id/loginFragmentContainer"/>
     </LinearLayout>
 
 </RelativeLayout>
