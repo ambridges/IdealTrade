@@ -124,6 +124,7 @@ public class AppActivity extends AppCompatActivity implements NavigationView.OnN
             case R.id.edit_profile:
                 // TODO implement proper profile & associated settings
                 Intent editIntent = new Intent(this, AccountActivity.class);
+                editIntent.putExtra("fragment", Globals.PROFILE);
                 startActivity(editIntent);
                 break;
             case R.id.post_skill:
