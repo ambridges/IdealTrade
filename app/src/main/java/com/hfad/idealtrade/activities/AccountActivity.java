@@ -1,12 +1,16 @@
 package com.hfad.idealtrade.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +35,9 @@ import com.hfad.idealtrade.utilities.Globals;
  * Created by Alex on 04/08/2016.
  */
 public class AccountActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    TabLayout tabs;
+    ViewPager pager;
 
     public Toolbar toolbar;
 
@@ -65,6 +72,32 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        // Set up ViewPager.
+        pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(new CustomAdapter(fragmentManager, this));
+
+        // Set up TabLayout
+        tabs = (TabLayout) findViewById(R.id.home_tabs);
+        tabs.setupWithViewPager(pager);
+
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                pager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                pager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                pager.setCurrentItem(tab.getPosition());
+            }
+        });
 
         // Configure & display hamburger icon
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -286,6 +319,48 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
     public boolean getActive(){
         return activeActivity;
+    }
+
+    /**
+     * Custom FragmentPagerAdapter.
+     */
+    private class CustomAdapter extends FragmentPagerAdapter {
+
+        private String fragments[] = {"Your Profile", "Inbox", "Privacy Settings", "Video Sharing", "File Sharing"};
+
+        public CustomAdapter(FragmentManager fragMan, Context applicationContext) {
+            super(fragMan);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new ProfileFragment();
+                case 1:
+                    return new InboxFragment();
+                case 2:
+                    return new ContactsFragment();
+                case 3:
+                    return new PrivacyFragment();
+                case 4:
+                    return new VideoSharingFragment();
+                case 5:
+                    return new FileSharingFragment();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragments[position];
+        }
     }
 
 }
