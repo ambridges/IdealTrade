@@ -79,6 +79,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         // Set up TabLayout
         tabs = (TabLayout) findViewById(R.id.home_tabs);
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabs.setupWithViewPager(pager);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
